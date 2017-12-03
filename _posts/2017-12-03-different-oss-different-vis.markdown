@@ -22,10 +22,10 @@ $ ls -l `find /etc/alternatives/vi -printf %l`
 -rwxr-xr-x 1 root root 2932160 nov 24  2016 /usr/bin/vim.gnome
 {% endhighlight %}
 
-Even if `which vi` returns immediately what can seem to be an executable, there is a matrioska-like structure of symlinks before reaching the *actual* executable file. The syntax `find /symlink/path -printf %l` is used to get the symlink target, as `which <name of program>` is used to get the path of the executable file.
+Even if `which vi` returns immediately what seems to be an executable, there is a matrioska-like structure of symlinks before reaching the *actual* executable file. The syntax `find /symlink/path -printf %l` is used to get the symlink target, as `which <name of program>` is used to get the path of the executable file.
 
 The executable which is used in Ubuntu (and many other Linux flavours) to represent `vi` is `vim.gnome`, an edition of `VIM - Vi IMproved`.
 
-This is not the case for [NetBSD][netbsd-link]. This OS uses the `nex/nvi` executable, which is (according to `man vi`) “as bug-for-bug compatible replacements for the original Fourth Berkeley Software Distribution (4BSD) ex and vi programs”.
+This is not the case for [NetBSD][netbsd-link]. This OS uses the `nvi` executable: respectively, `nex` and `nvi` are “bug-for-bug compatible replacements for the original Fourth Berkeley Software Distribution (4BSD) ex and vi programs” (as specified in the `man vi` page).
 
 [netbsd-link]: http://www.netbsd.org
