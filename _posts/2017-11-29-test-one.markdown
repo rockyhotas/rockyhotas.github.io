@@ -1,0 +1,19 @@
+---
+layout: post
+title:  "Test one"
+date:   2017-11-29 16:30:32 +0100
+categories: jekyll update
+mathjax: true
+---
+Product between a complex number $z_1$ and its conjugate $z_1^*$:
+
+$$z_1 = a + ib\\
+z_2 = a - ib = z_1^*\\
+z_3 = z_1 \cdot z_2 = a^2 + b^2 = \left| z_1 \right|^2\\
+a,b \in \mathbb{R}$$
+
+Check out the [Jekyll docs][jekyll-docs] for more info on how to get the most out of Jekyll. File all bugs/feature requests at [Jekyll’s GitHub repo][jekyll-gh]. If you have questions, you can ask them on [Jekyll Talk][jekyll-talk].
+
+[jekyll-docs]: https://jekyllrb.com/docs/home
+[jekyll-gh]:   https://github.com/jekyll/jekyll
+[jekyll-talk]: https://talk.jekyllrb.com/
