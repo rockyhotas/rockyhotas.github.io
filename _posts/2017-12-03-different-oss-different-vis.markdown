@@ -2,7 +2,7 @@
 layout: post
 title:  "Different OSs, different vis"
 date:   2017-12-03 18:25:32 +0100
-categories: jekyll update
+categories: linux netbsd
 ---
 Unix-like Operating Systems can have different implementations of the same commands, utilities, and/or programs. One of the most remarkable cases is `vi`.
 
@@ -26,6 +26,15 @@ Even if `which vi` returns immediately what seems to be an executable, there is 
 
 The executable which is used in Ubuntu (and many other Linux flavours) to represent `vi` is `vim.gnome`, an edition of `VIM - Vi IMproved`.
 
-This is not the case for [NetBSD][netbsd-link]. This OS uses the `nvi` executable: respectively, `nex` and `nvi` are “bug-for-bug compatible replacements for the original Fourth Berkeley Software Distribution (4BSD) ex and vi programs” (as specified in the `man vi` page).
+This is not the case for [NetBSD][netbsd-link]:
+
+{% highlight bash %}
+$ ls -l `which vi`
+-r-xr-xr-x  3 root  wheel  465503 Mar 11  2017 /usr/bin/vi
+{% endhighlight%}
+
+First of all, in this case there are no symlinks and `/usr/bin/vi` is immediately an executable. Its Ubuntu counterpart was called `vim.gnome` and has been presented before: but even when the name `vi` itself is used, there is *no* unique version of this well-known program.
+
+The `vi` executable used by NetBSD is a program also known as `nvi`: respectively, `nex` and `nvi` are “bug-for-bug compatible replacements for the original Fourth Berkeley Software Distribution (4BSD) ex and vi programs” (as specified in the `man vi` page).
 
 [netbsd-link]: http://www.netbsd.org
