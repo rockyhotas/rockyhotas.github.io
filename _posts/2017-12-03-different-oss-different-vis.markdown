@@ -31,7 +31,7 @@ This is not the case for [NetBSD][netbsd-link]:
 {% highlight bash %}
 $ ls -l `which vi`
 -r-xr-xr-x  3 root  wheel  465503 Mar 11  2017 /usr/bin/vi
-{% endhighlight%}
+{% endhighlight %}
 
 First of all, in this case there are no symlinks and `/usr/bin/vi` is immediately an executable. Anyway, even when the name `vi` itself is used, there is *no* unique version of this well-known program.
 
