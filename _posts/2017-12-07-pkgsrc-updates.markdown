@@ -3,6 +3,7 @@ layout: post
 title:  "pkgsrc and package upgrades"
 date:   2017-12-07 12:48:32 +0100
 categories: netbsd
+published: false
 ---
 The [NetBSD][netbsd-link] package build (and distribution) system is
 [pkgsrc][pkgsrc-link].
