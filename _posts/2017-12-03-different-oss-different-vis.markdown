@@ -33,8 +33,8 @@ $ ls -l `which vi`
 -r-xr-xr-x  3 root  wheel  465503 Mar 11  2017 /usr/bin/vi
 {% endhighlight%}
 
-First of all, in this case there are no symlinks and `/usr/bin/vi` is immediately an executable. Its Ubuntu counterpart was called `vim.gnome` and has been presented before: but even when the name `vi` itself is used, there is *no* unique version of this well-known program.
+First of all, in this case there are no symlinks and `/usr/bin/vi` is immediately an executable. Anyway, even when the name `vi` itself is used, there is *no* unique version of this well-known program.
 
-The `vi` executable used by NetBSD is a program also known as `nvi`: respectively, `nex` and `nvi` are “bug-for-bug compatible replacements for the original Fourth Berkeley Software Distribution (4BSD) ex and vi programs” (as specified in the `man vi` page).
+The `vi` executable used by NetBSD is also known as `nvi`: respectively, `nex` and `nvi` are “bug-for-bug compatible replacements for the original Fourth Berkeley Software Distribution (4BSD) ex and vi programs” (as specified in the `man vi` page).
 
 [netbsd-link]: http://www.netbsd.org
