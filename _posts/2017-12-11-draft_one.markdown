@@ -176,7 +176,7 @@ pci0
 This is a laptop collection of devices, showing *how* the kernel has learnt about the hardware. It depends both on *the kernel code* and on *the way the devices presented themselves* to the OS. This is a **logical** structure, which does not necessarily mirror the physical arrangement of the devices. For example, different PCI-to-PCI bridges can be implemented all inside a single chip. The PCI buses themselves could not correspond to physical buses on the motherboard: they could simply be an abstraction (made by the kernel, or by the devices firmware) which offers a more convenient way to handle the underlying hardware. Regardless of the reality, this logical structure is significant because when the kernel will refer to hardware, it will refer to **this** arrangement.
 
 <figure>
-  <a href="{{ "/assets/devtree_light.png" | relative_url }}" target="_blank"><img src="{{ "/assets/devtree_light.png" | relative_url }}" alt="A device tree example"></a>
+  <a href="{{ "assets/devtree_light.png" | relative_url }}" target="_blank"><img src="{{ "assets/devtree_light.png" | relative_url }}" alt="A device tree example"></a>
   <figcaption>A device tree example.</figcaption>
 </figure>
 
