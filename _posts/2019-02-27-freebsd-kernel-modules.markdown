@@ -10,7 +10,17 @@ FreeBSD kernel comes with some basic features. It could be necessary, however, t
 
 (From [Wikipedia])
 
-To add, list and remove FreeBSD kernel modules, the `kld` interface is available: these operations are respectively performed by the tools `kldload(8)`, `kldstat(8)` and `kldunload(8)`.
+Again, modules are used by
+
+> system administrators to dynamically add and remove functionality from a running system.
+
+They also allow
+
+> device driver writers to load their new changes into a running kernel without constantly rebooting to test changes.
+
+(From the [FreeBSD Handbook])
+
+To add, list and remove FreeBSD kernel modules, the [Dynamic Kernel Linker][FreeBSD Handbook] `kld` interface is available: these operations are respectively performed by the tools `kldload(8)`, `kldstat(8)` and `kldunload(8)`.
 
 <BR>
 
@@ -60,7 +70,7 @@ Usually, modules which are part of the base system (shipped with the OS) are in 
 
 For example, `ext2fs.ko`, `coretemp.ko`, `fuse.ko` are stored in `/boot/kernel`, while `radeonkms.ko`, `drm.ko` and the modules `radeon_R*.ko` are stored in `/boot/modules`.
 
-`kldload(8)` also states that
+`kldload(8)` also states that:
 
     To load a module from the current directory it must be specified as a full
     or relative path.	
@@ -101,4 +111,5 @@ If for example modules `ext2fs` and/or `fuse` are required to mount one or more 
 
 [object file]: https://en.wikipedia.org/wiki/Object_file
 [Wikipedia]: https://en.wikipedia.org/wiki/Loadable_kernel_module
+[FreeBSD Handbook]: https://www.freebsd.org/doc/en/books/arch-handbook/driverbasics-kld.html
 [this message]: https://lists.freebsd.org/pipermail/freebsd-questions/2014-August/260678.html
