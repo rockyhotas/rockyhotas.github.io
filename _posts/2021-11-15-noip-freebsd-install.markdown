@@ -4,7 +4,7 @@ title:  "no-ip DDNS service FreeBSD install"
 date:   2021-11-15 22:39:10 +0100
 categories: unix, rc.d, ddns, freebsd
 ---
-If you [ISP][isp] does not provide a static IP address to your modem, a Dynamic DNS service may be very useful. [no-ip.com][no-ip] provides this service for free.
+If your [ISP][isp] does not provide a static IP address to your modem, a Dynamic DNS service may be very useful. [no-ip.com][no-ip] provides this service for free.
 
 It needs an executable installed in a local machine, which regularly checks the public IP address of the modem (almost all the modems now integrate this service in their firmware, but this would be less funny). [no-ip.com][no-ip] offers this executable for Linux systems. It can be easily adapted to the FreeBSD build environment and installed; as an alternative, the [FreeBSD `pkg` repository][pkg-repository] already includes a package with an up-to-date version of this program, which also provides an `rc.d` script to use it as a daemon. In fact, this is exactly what Dynamic DNS would need: an executable constantly running.
 
