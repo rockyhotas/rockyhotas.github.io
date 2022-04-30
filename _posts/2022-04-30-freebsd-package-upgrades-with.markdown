@@ -136,7 +136,7 @@ Fetching 166 files... ....10....20....30....40....50....60....70....80....90....
 Attempting to automatically merge changes in files... done.
 ```
 
-If the system is particularly out-of-date, it may happen that this first step seems to end correctly, but a reboot is not requested and the next step (which will be `/usr/sbin/freebsd-update install`) quickly ends without actually installing anything. If this is the case, two update iterations must be performed. So, repeat the procedure running a second time `freebsd-update -r <release_number> upgrade`.
+If the system is particularly out-of-date, it may happen that this first step seems to end correctly, but the next step (which will be `/usr/sbin/freebsd-update install`) quickly ends without actually installing anything and does not require a reboot. If this is the case, two update iterations must be performed. So, repeat the procedure running a second time `freebsd-update -r <release_number> upgrade`.
 
 After the fetch, the differences between the new files (which are going to be installed) and the current ones are shown, if any:
 
