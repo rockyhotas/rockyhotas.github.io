@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "FreeBSD package updates with non compatible kernel"
+title:  "FreeBSD package upgrades with non compatible kernel"
 date:   2022-04-30 15:24:00 +0200
 categories: freebsd, kernel, packages, updates
 ---
@@ -61,7 +61,7 @@ Checking integrity... done (0 conflicting)
 Generating gdk-pixbuf modules cache
 ```
 
-This is an example of a successful procedure, with some packages upgraded. However, sometimes the upgrade is preceeded by an error message of this kind:
+This is a successful procedure. Sometimes instead an error message of this kind is printed:
 
 ```
 $ uname -a
