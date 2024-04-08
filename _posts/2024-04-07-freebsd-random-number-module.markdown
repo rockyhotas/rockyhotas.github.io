@@ -175,7 +175,7 @@ The contents of the buffer must be transferred to the user through `uiomove`. Fi
             rolldmsg->len + 1 - uio->uio_offset);
 ```
 
-Without this check, `cat /dev/rolld` continuously prints the buffer contents and for some reason `tail -c 1 /dev/rolld` produces no output, as well as `tail -c 1 /dev/random`.
+Without this check, and replacing instead `amt` with a fixed value, `cat /dev/rolld` continuously prints the buffer contents as if the die was rolled endless times: `uiomove(rolldmsg->msg, 1, uio)` prints endless numbers between 1 and 6; `uiomove(rolldmsg->msg, 2, uio)` does the same, but each number is in a newline (because newline is the second element of the buffer `msg`). Also, for some reason `tail -c 1 /dev/rolld` produces no output, as well as `tail -c 1 /dev/random`.
 
 ```
         if ((error = uiomove(rolldmsg->msg, amt, uio)) != 0)
