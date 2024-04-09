@@ -283,7 +283,7 @@ In the above section, given the Architecture Handbook [example code][char-device
 
 A whole buffer `msg`, referenced by a related `struct s_roll`, is not even necessary in this case, when only a single 1 byte value must be provided to the user each time the file `/dev/rolld` is read.
 
-Consider [this simpler code][rolld-repo-2] now: it is simpler in the sense that it does not create a buffer, it does not have `struct s_roll` and it does not need to use `malloc()'. Messages in `rolld_open`, `rolld_close` and `rolld_read` are instead produced through `uprintf` to better distinguish what code is being executed. Moreover, there is no translation between the raw `random_out` value and an ASCII printable digit.
+Consider [this simpler code][rolld-repo-2] now: it is simpler in the sense that it does not create a buffer, it does not have `struct s_roll` and it does not need to use `malloc()'. Messages in `rolld_open`, `rolld_close` and `rolld_read` are instead produced through `uprintf` to better distinguish what code is being executed, as suggested [here][post-2]. Moreover, there is no translation between the raw `random_out` value and an ASCII printable digit.
 
 This will allow to get more insight into the operations performed by the code.
 
@@ -320,7 +320,7 @@ The values provided by `random_out` may be integers between `0` and `5`, which c
 |`4`	|`EOT`	`^D`		|
 |`5`	|`ENQ`	`^E`		|
 
-Being them non-printable, it is better to use `cat(1)` with `-v` option, to show them without the need of other tools like `hexdump`. When `cat -v` is called on `/dev/rolld`, this output is produced:
+Being them non-printable, it is better to use `cat(1)` with `-v` option, to show them without the need of other tools like `hexdump`. When `cat -v` is called on `/dev/rolld`, as suggested in [this post][post-2], this output is produced:
 
 ```
 $ cat -v /dev/rolld 
@@ -506,4 +506,5 @@ $ cat rolld
 [stack-1]: https://unix.stackexchange.com/a/323759
 [thread-1]: https://lists.freebsd.org/archives/freebsd-hackers/2024-April/003142.html
 [post-1]: https://lists.freebsd.org/archives/freebsd-hackers/2024-April/003146.html
+[post-2]: https://lists.freebsd.org/archives/freebsd-hackers/2024-April/003145.html
 [stack-2]: https://stackoverflow.com/a/3354479
