@@ -40,7 +40,7 @@ Use a suitable random number generator mechanism available inside the kernel to 
     -r--r--r--    7 root wheel  2227 Nov 10 09:32 srandom.9.gz
     ```
 
-2. Using `apropos(1)':
+2. Using `apropos(1)`:
 
     ```
     $ apropos -s 9 random
@@ -283,7 +283,7 @@ In the above section, given the Architecture Handbook [example code][char-device
 
 A whole buffer `msg`, referenced by a related `struct s_roll`, is not even necessary in this case, when only a single 1 byte value must be provided to the user each time the file `/dev/rolld` is read.
 
-Consider [this simpler code][rolld-repo-2] now: it is simpler in the sense that it does not create a buffer, it does not have `struct s_roll` and it does not need to use `malloc()'. Messages in `rolld_open`, `rolld_close` and `rolld_read` are instead produced through `uprintf` to better distinguish what code is being executed, as suggested [here][post-2]. Moreover, there is no translation between the raw `random_out` value and an ASCII printable digit.
+Consider [this simpler code][rolld-repo-2] now: it is simpler in the sense that it does not create a buffer, it does not have `struct s_roll` and it does not need to use `malloc()`. Messages in `rolld_open`, `rolld_close` and `rolld_read` are instead produced through `uprintf` to better distinguish what code is being executed, as suggested [here][post-2]. Moreover, there is no translation between the raw `random_out` value and an ASCII printable digit.
 
 This will allow to get more insight into the operations performed by the code.
 
