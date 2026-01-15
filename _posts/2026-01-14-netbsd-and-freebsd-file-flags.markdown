@@ -168,13 +168,13 @@ The manpage [`find(1)`][find-alt] doesn't consider the case of multiple flags, b
 Flags are a comma separated list of keywords.
 ```
 
-Here, `none` can be specified as a flag in [`find(1)`][find-alt] (but not in [`chflags(1)`][chflags-alt]), so
+Here, `none` can be specified as a flag in [`find(1)`][find-alt], so
 
 ```
 # find / -type f -not -flags none
 ```
 
-will find all the files having at least one active flags. On the other hand, `find / -type f -flags none` will find all the files without flags. In a NetBSD 10.1 fresh installations, these are all the files in the system, because by default there are no files with flags set. Note that in NetBSD `none` can not be used by `chflag`. In other words, `chflags none somefile` is not accepted and therefore it can not be used to clear all the flags of a file.
+will find all the files having at least one active flags. On the other hand, `find / -type f -flags none` will find all the files without flags. In a NetBSD 10.1 fresh installations, these are all the files in the system, because by default there are no files with flags set. Note that in NetBSD `none` is not accepted as a flag by [`chflags(1)`][chflags-alt]: in other words, `chflags none somefile` can not be used to clear all the flags of a file.
 
 Apparently, in FreeBSD there is instead no direct way to use `find(1)` and detect files having _any_ flag, that is: print all the files having _at least_ one flag. A tricky and lengthy syntax seems the only way to achieve this, using all the available flags one by one, preceded by dashes. As regards the flags with two or more equivalent keywords, it is enough to specify just one of them. For example, `-flags uappnd` will find all the files with the flag `uappnd`, even if it has been added as `uappend`, and vice-versa. Run this as `root`, to be sure to consider all the files and all the flags:
 
