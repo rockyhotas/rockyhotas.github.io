@@ -136,7 +136,7 @@ Otherwise, if the flag list is preceded by a dash `-`, the `find` command evalua
 
 The last attempt gave no results, not even `./examplefile2`, because its flags are a subset of this list (the list contains more flags than the ones of the file).
 
-Instead, if the flag list is preceded by a plus `+`, the last attempt would give `./examplefile2` as a result, because in this case (with respect to the previous one) it is true _even_ when the flags of the file are a subset of the flags of the list.
+Instead, if the flag list is preceded by a plus `+`, the last attempt would give `./examplefile2` as a result, because in this case (with respect to the previous one) `find` evaluates to true _even_ when the flags of the file are a subset of the flags of the list.
 
 ```
 # find . -type f -flags +schg
@@ -160,7 +160,6 @@ In NetBSD, [`find(1)`][find-alt] more laconically states:
              file's flags bits.  If flags is ``none'', files with no flags
              bits set are matched.  (See chflags(1) for more information about
              file flags.)
-
 ```
 
 The manpage [`find(1)`][find-alt] doesn't consider the case of multiple flags, but they can be specified in `find`, and in this case they must be in a comma-separated list. This is stated in [`chflags(1)`][chflags-alt]:
