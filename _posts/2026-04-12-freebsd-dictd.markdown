@@ -34,7 +34,7 @@ dictd-1.13.3:
         /usr/local/share/man/man8/dictd.8.gz
 ```
 
-Between them, a sample configuration file is provided, with a bunch of entries like:
+Between them, a sample configuration file is provided, with a bunch of entries of this kind:
 
 ```
 database jargon    { data "/usr/local/lib/dict/jargon.dict.dz"
@@ -47,7 +47,7 @@ Some suitable dictionaries can be fetched from [https://freedict.org/](https://f
 
 Fetch the archive file [`freedict-eng-cat-2025.11.23.dictd.tar.xz`](https://download.freedict.org/dictionaries/eng-cat/2025.11.23/freedict-eng-cat-2025.11.23.src.tar.xz), verify its checksum and extract the files.
 
-As stated in the `FILES` section of the manpage,
+As stated in the `FILES` section of dictd(8),
 
 ```
       /usr/local/share
@@ -55,7 +55,7 @@ As stated in the `FILES` section of the manpage,
               files)
 ```
 
-The databases may then be stored in a subdirectory named `dict` or `dictd`. In the `SEE ALSO` section, some `examples/dictd*.conf` appear, but nothing similar is installed or present in the system, except for the already considered `/usr/local/etc/dictd.conf.sample`, whose directory is however not named `examples`. The `webster(1)` manpage mentioned in the same section is not present, as well: maybe this information is referred to Linux or some other OS and the manpage for FreeBSD has not been updated.
+The databases may then be stored in a subdirectory named `dict` or `dictd`. In the `SEE ALSO` section, some `examples/dictd*.conf` appear, but nothing similar is installed or present in the system, except for the already considered `/usr/local/etc/dictd.conf.sample`, whose directory is however not named `examples`. The `webster(1)` manpage mentioned in the same section is not present, as well: maybe this information is referred to Linux or some other OS and the manpage for FreeBSD has not been adapted.
 
 The dictionary format used here relies upon [two files][dictionary_format]:
 
@@ -170,7 +170,7 @@ From English-català FreeDict+WikDict dictionary ver. 2025.11.23 [eng-cat]:
   (music) A woodwind instrument.
 ```
 
-If a database is added or modified, it's possible to make `dictd` aware without restarting the service. From `dictd(8)`:
+If a database is added or modified, it is possible to make `dictd` aware without restarting the service. From `dictd(8)`:
 
 ```
        SIGHUP causes dictd to reread configuration file and reinitialize
