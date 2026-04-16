@@ -10,7 +10,15 @@ categories: freebsd
 
 The Dictionary Server Protocol (DICT) allows to easily provide (as a server) and query (as a client) dictionaries across networks. It relies upon TCP, with plain text, even human readable messages.
 
-In FreeBSD package repository, the DICT server is provided by [`net/dictd`][package]. Its manpage is `dictd(8)`. The few and simple installed files are:
+In FreeBSD package repository, the DICT server is provided by [`net/dictd`][package]. To run and also test the server, install it along with `textproc/dict`, which is the client. Then, add
+
+```
+dictd_enable="YES"
+```
+
+to `/etc/rc.conf`.
+
+The dict server manpage is `dictd(8)`. The few and simple installed files are:
 
 ```
 $ pkg info -l dictd
@@ -35,11 +43,9 @@ database jargon    { data "/usr/local/lib/dict/jargon.dict.dz"
 
 The `Database Section`, with its `database` entries, is the only mandatory one.
 
-All the entries refer to the directory `/usr/local/lib/dict/`, which does not exist, it is not created by the package installation, and it is of course not populated by the `.dict.dz` and `.index` files mentioned in this example configuration file. Is there any FreeBSD dictionary package which automatically does this?
-
 Some suitable dictionaries can be fetched from [https://freedict.org/](https://freedict.org/), in the Downloads section. Choose "Dictd: Computers", "Dictionary Downloads", then pick a language, for example "English". Here, the "English - Catalan, version 2025.11.23 with 35163 headwords" will be used as an example.
 
-Fetch the archive file `freedict-eng-cat-2025.11.23.dictd.tar.xz`, verify its checksum and extract the files.
+Fetch the archive file [`freedict-eng-cat-2025.11.23.dictd.tar.xz`](https://download.freedict.org/dictionaries/eng-cat/2025.11.23/freedict-eng-cat-2025.11.23.src.tar.xz), verify its checksum and extract the files.
 
 As stated in the `FILES` section of the manpage,
 
@@ -49,23 +55,38 @@ As stated in the `FILES` section of the manpage,
               files)
 ```
 
-This is a different directory with respect to the one used in `/usr/local/etc/dictd.conf.sample`.
-
 The databases may then be stored in a subdirectory named `dict` or `dictd`. In the `SEE ALSO` section, some `examples/dictd*.conf` appear, but nothing similar is installed or present in the system, except for the already considered `/usr/local/etc/dictd.conf.sample`, whose directory is however not named `examples`. The `webster(1)` manpage mentioned in the same section is not present, as well: maybe this information is referred to Linux or some other OS and the manpage for FreeBSD has not been updated.
 
-According to the lines in `/usr/local/etc/dictd.conf.sample`, two files are needed for each dictionary in this format: the `.dict.dz` and `.index` files. Both are available in `freedict-eng-cat-2025.11.23.dictd.tar`. After creating the directory `/usr/local/share/dictd`, `eng-cat.dict.dz` are `eng-cat.index` are copied there.
+The dictionary format used here relies upon [two files][dictionary_format]:
 
-First, install the packages `net/dictd` and `textproc/dict`, respectively the DICT server and client. Then, add
+- a dictionary database file, whose name is `example_dictionary.dict` or `example_dictionary.dict.dz` if it is compressed;
+- an index file `example_dictionary.index`, listing the terms with their offsets within the database.
+
+This is confirmed by the lines in `/usr/local/etc/dictd.conf.sample`, which always use a `.dict.dz` and `.index` file for each dictionary. In this example, both are available in `freedict-eng-cat-2025.11.23.dictd.tar`. After creating the directory `/usr/local/share/dictd`, copy there `eng-cat.dict.dz` and `eng-cat.index`.
+
+According to `dictd(8)`,
 
 ```
-dictd_enable="YES"
+/usr/local/etc/dictd.conf
+              dictd configuration file
 ```
 
-in `/etc/rc.conf`.
+Having not much information about the server, this first attempt can be made:
 
-The `dictd.conf.sample` configuration file must be completely rewritten and the chosen directory must be populated with dictionary files. As stated in the manpage, the configuration file is `/usr/local/etc/dictd.conf`.
+```
+# cp /usr/local/etc/dictd.conf.sample /usr/local/etc/dictd.conf
+```
 
-It is tricky to verify that the server is actually running and that the information included in the configuration file is correct. In fact, if for example some non-existing paths are present in `/usr/local/etc/dictd.conf`, the `dictd` daemon offers no clue about the error and even about its running status.
+Then, append the lines referred to the downloaded database to that file:
+
+```
+database eng-cat    { data "/usr/local/share/dictd/eng-cat.dict.dz"
+                     index "/usr/local/share/dictd/eng-cat.index" }
+```
+
+It is tricky to verify that the server is actually running and that the information included in the configuration file and/or its syntax is correct. In fact, if for example some non-existing paths are present in `/usr/local/etc/dictd.conf`, the `dictd` daemon offers no clue about the possible errors and even about its running status.
+
+After creating the configuration file as shown,
 
 ```
 # service dictd start
@@ -78,7 +99,7 @@ dictd is not running.
 root   61402   0.0  0.1   13836  2132  2  S+   00:19       0:00.00 grep dic
 ```
 
-No process has been created for `dictd`, but on the other hand no error followed `Starting dictd.`. Nothing changes running directly the daemon executable with the `-v` option: `/usr/local/sbin/dictd -v`.
+There is no `dictd` process, but on the other hand no error followed `Starting dictd.`. Nothing changes running directly the daemon executable with the `-v` option: `/usr/local/sbin/dictd -v`.
 
 Checking the path provided by `dictd(8)`:
 
@@ -104,7 +125,9 @@ has no output. `2628` is the default port number (not modified in the configurat
 
 There is also no information regarding `dictd` in `/var/log`.
 
-After fixing the configuration file, cleaning all the non-existing entries, and leaving only the existing one,
+As shown above with `database jargon`, all but one of the entries of the `/usr/local/etc/dictd.conf` configuration file refer to the directory `/usr/local/lib/dict/`, which does not exist, it is not created by the package installation, and it is of course not populated by the `.dict.dz` and `.index` files mentioned in `/usr/local/etc/dictd.conf.sample` used here. Is there any FreeBSD dictionary package which automatically does this?
+
+The only entry in `/usr/local/etc/dictd.conf` corresponding to actually existing files was the one appended here: the `eng-cat` dictionary. After deleting from the configuration file all the non-existing original entries, and leaving only
 
 ```
 database eng-cat    { data "/usr/local/share/dictd/eng-cat.dict.dz"
@@ -675,5 +698,6 @@ This was a server with `site_no_banner`, `site_no_uptime`, `site_no_dblist` set 
 
 
 [package]: https://www.freshports.org/net/dictd
+[dictionary_format]: https://www.gnu.org.ua/software/dico/manual/dictorg.html
 [rfc1]: https://datatracker.ietf.org/doc/html/rfc2229
 [sourceforge]: https://sourceforge.net/projects/dict/
